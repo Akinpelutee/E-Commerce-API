@@ -1,4 +1,4 @@
-from app import db
+from extensions import db
 
 class OrderItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -9,5 +9,3 @@ class OrderItem(db.Model):
 
     product = db.relationship('Product', backref=db.backref('order_items', lazy=True))
 
-    def __repr__(self):
-        return f"OrderItem('{self.order.id}', '{self.product.name}')"

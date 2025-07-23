@@ -1,4 +1,4 @@
-from app import db
+from extensions import db
 
 class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -7,7 +7,4 @@ class Order(db.Model):
     total = db.Column(db.Float, nullable=False)
 
     user = db.relationship('User', backref=db.backref('orders', lazy=True))
-    order_items = db.relationship('OrderItem', backref=db.backref('order', lazy=True))
-
-    def __repr__(self):
-        return f"Order('{self.id}', '{self.user.username}')"
+    #order_items = db.relationship('OrderItem', backref=db.backref('order', lazy=True))

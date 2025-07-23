@@ -1,4 +1,4 @@
-from app import db
+from extensions import db
 
 class Cart(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -9,5 +9,3 @@ class Cart(db.Model):
     user = db.relationship('User', backref=db.backref('carts',lazy=True))
     product = db.relationship('Product', backref=db.backref('carts',lazy=True))
 
-    def __repr__(self):
-        return f"Cart('{self.user.username}', '{self.product.name}')"

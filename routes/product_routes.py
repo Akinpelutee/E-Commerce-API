@@ -1,24 +1,11 @@
-# routes/product_routes.py
-from flask import request, jsonify
 from flask_restful import Resource
-from models.product import Product
-from app import db
+from models.cart import Cart
+from extensions import db
 
-class ProductList(Resource):
-    def get(self):
-        products = Product.query.all()
-        return [{'id': product.id, 'name': product.name, 'price': product.price} for product in products]
-
+class CartList(Resource):
     def post(self):
-        data = request.get_json()
-        product = Product(name=data['name'], description=data['description'], price=data['price'], quantity=data['quantity'])
-        db.session.add(product)
+        data = {'user_id': 1, 'product_id': 1, 'quantity': 2}
+        cart = Cart(user_id=data['user_id'], product_id=data['product_id'], quantity=data['quantity'])
+        db.session.add(cart)
         db.session.commit()
-        return {'message': 'Product created successfully'}
-
-class ProductDetail(Resource):
-    def get(self, product_id):
-        product = Product.query.get(product_id)
-        if product:
-            return {'id': product.id, 'name': product.name, 'price': product.price}
-        return {'message': 'Product not found'}, 404
+        return {'message': 'Product added to Cart'}

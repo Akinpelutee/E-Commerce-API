@@ -2,7 +2,7 @@
 from flask import request, jsonify
 from flask_restful import Resource
 from models.order import Order
-from app import db
+from extensions import db
 
 class OrderList(Resource):
     def get(self, user_id):
