@@ -6,8 +6,8 @@ class Cart(db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
 
-    user = db.relationship('User', backref=b.backref('carts',lazy=True))
-    product = db.relationship('Product', backref=b.backref('carts',lazy=True))
+    user = db.relationship('User', backref=db.backref('carts',lazy=True))
+    product = db.relationship('Product', backref=db.backref('carts',lazy=True))
 
     def __repr__(self):
         return f"Cart('{self.user.username}', '{self.product.name}')"
