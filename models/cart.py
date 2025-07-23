@@ -1,0 +1,13 @@
+from app import db
+
+class Cart(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+
+    user = db.relationship('User', backref=b.backref('carts',lazy=True))
+    product = db.relationship('Product', backref=b.backref('carts',lazy=True))
+
+    def __repr__(self):
+        return f"Cart('{self.user.username}', '{self.product.name}')"
